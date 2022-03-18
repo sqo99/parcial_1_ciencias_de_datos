@@ -1,6 +1,6 @@
 ---
 title: "Práctica 6"
-author: "Abdiel Arturo Quevedo Ortiz"
+author: "Suriel Quevedo Ortiz"
 date: '2022-03-16'
 output:
   html_document:
