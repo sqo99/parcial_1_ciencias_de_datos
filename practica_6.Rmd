@@ -1,0 +1,70 @@
+---
+title: "Práctica 4"
+author: "Suriel Quevedo Ortiz"
+date: '2022-03-10'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      smooth_scrool: no
+    number_sections: yes
+    theme: united
+    highlight: tango
+---
+
+```{r include=FALSE}
+library(dplyr)
+```
+
+# Carga la base de datos airquality
+
+```{r}
+data("airquality")
+airquality
+```
+
+# Calcula el promedio mensual de temperaturas (temp), puedes considerar una agrupación por mes. Posteriormente, realiza un gráfico de barras (tanto horizontal como vertical) que tenga lo siguiente:
+  Título: Promedio mensual de temperatura
+  
+  Eje x: Mes
+  
+  Eje y: Promedio mensual
+  
+  Barras en color amarillo (horizontal) y color verde (vertical) 
+
+```{r}
+data <- summarize(group_by(airquality, Month), promedio_mensual = mean(Temp, na.rm = TRUE))
+barplot(height = data$promedio_mensual,
+        names.arg = data$Month,
+        main = "Promedio mensual de temperatura",
+        xlab = "Mes", horiz = TRUE,
+        ylab = "Promedio mensual",
+        col = "yellow")
+barplot(height = data$promedio_mensual,
+        names.arg = data$Month,
+        main = "Promedio mensual de temperatura",
+        xlab = "Mes", horiz = FALSE,
+        ylab = "Promedio mensual",
+        col = "green")
+```
+
+# Realiza un gráfico de dispersión donde grafiques Ozone vs Solar.R, con el siguiente formato:
+  Título: Ozono vs Radiación solar
+  
+  xlab: Radiación
+  
+  ylab: Ozono
+  
+  type="o"
+  
+  color azul 
+
+```{r}
+plot(x = airquality$Ozone, y = airquality$Solar.R,
+     type="o",
+     main="Ozono vs Radiación solar",
+     xlab = "Radiación",
+     ylab = "Ozono",
+     col = "blue")
+```
