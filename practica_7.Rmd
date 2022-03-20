@@ -1,0 +1,15 @@
+---
+title: "Práctica 7"
+author: "Suriel Quevedo Ortiz"
+date: '2022-03-18'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      smooth_scrool: no
+    number_sections: yes
+    theme: united
+    highlight: tango
+---
+
