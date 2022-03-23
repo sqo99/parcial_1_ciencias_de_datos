@@ -1,0 +1,65 @@
+---
+title: "Práctica 9"
+author: "Suriel Quevedo Ortiz"
+date: '2022-03-23'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      smooth_scrool: no
+    number_sections: yes
+    theme: united
+    highlight: tango
+---
+
+```{r include=FALSE}
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+data <- read.csv("EconomistData.csv")
+```
+
+# Gráfico de dispersión
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI))
+```
+
+# Colorear de azul os puntos en el gráfico
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI), color = "blue")
+```
+
+# Asigne el color de los puntos a la variable Region
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI, color = Region))
+```
+
+# Aumentar el tamaño de los puntos configurado el tamaño (size) en 2
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI, color = Region, size = 2))
+```
+
+# Asignar el tamaño de los puntos a HDI.Rank
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI, color = Region, size = HDI.Rank))
+```
+
+# Cambia la forma de los puntos
+
+```{r}
+ggplot(data = data) +
+  geom_point(mapping = aes(x = CPI, y = HDI, color = Region, shape = Region))
+```

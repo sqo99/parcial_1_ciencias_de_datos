@@ -13,3 +13,274 @@ output:
     highlight: tango
 ---
 
+```{r include=FALSE}
+library(dplyr)
+library(tidyverse)
+```
+
+# Resumen de la base de datos con la función str
+
+```{r}
+estudiantes <- read.table(file="Estudiantes.data", header=TRUE, sep = "\t")
+str(estudiantes)
+```
+
+# Nombre de las variables
+
+```{r}
+names(estudiantes)
+```
+
+# Información del tamaño del archivo, dimensiones(fila, columna)
+
+```{r}
+object.size(estudiantes)
+nrow(estudiantes)
+ncol(estudiantes)
+```
+
+# 5
+
+```{r}
+newdata <- estudiantes[1:10, 2:5]
+```
+
+## a) Solo la fila 3 y la columna 2
+
+```{r}
+newdata[3,2]
+```
+
+## b) Todas las filas y solo la columna 2
+
+```{r}
+newdata[,2]
+```
+
+## c) Solo la fila 3 y todas las columnas
+
+```{r}
+newdata[3,]
+```
+
+## d) Quitar la fila 5 y dejar todas las columnas
+
+```{r}
+newdata[-5,]
+```
+
+## e) Todas las filas, pero sin la columna 2
+
+```{r}
+newdata[,-2]
+```
+
+## f) Todas las filas, pero solo las columnas de 2 a 5
+
+```{r}
+newdata[,2:4]
+```
+
+## g) Todas las filas, pero solo las columnas 2 y 5
+
+```{r}
+newdata[,c(2,4)]
+```
+
+## h) Solo las filas de 1 a 4, con las columnas 2 a 5
+
+```{r}
+newdata[1:4, 2:4]
+```
+
+# Tipos de variables
+
+```{r}
+sapply(select(estudiantes, ID, Edad, Sexo), class)
+datos <- transform(estudiantes, Edad = as.numeric(Edad))
+datos <- transform(estudiantes, Sexo = as.factor(Sexo))
+```
+
+# Tablas univariadas
+
+```{r}
+# Definiendo y convirtiendo en factor
+sexo <- as.factor(estudiantes$Sexo)
+# Calcular tabla de frecuencias
+tabla1 <- table(sexo)
+```
+
+# Tabla cruzada o de contingencia
+
+```{r}
+# Definiendo y convirtiendo en factor
+fuma <- as.factor(estudiantes$Fuma)
+# Tabla de frecuencias con table
+tabla2 <- table(sexo, fuma)
+barplot(tabla2,
+        main = "Cantidad de hombres y mujeres, categorizadas por ser o no fumador",
+        xlab = "Personas que fuman y no fuman",
+        ylab = "Frecuencia por Sexo",
+        col = rainbow(3),
+        legend.text = rownames(tabla2),
+        args.legend = list(title = "Sexo", x = "topright"),
+        horiz = FALSE)
+```
+
+# Segunda parte
+
+```{r}
+MisDatos <- estudiantes[2:193, c(5:15,20,35)]
+```
+
+## a) Visualizar los primeros 6 registros del subconjunto de datos
+
+```{r}
+head(MisDatos, 6)
+```
+
+## b) Revisar la estructura de estos nuevos datos
+
+```{r}
+str(MisDatos)
+```
+
+## c) Explorar los nombres de las variables
+
+```{r}
+names(MisDatos)
+```
+
+## d) Explorar tamaños (filas, columnas, tamaño del archivo)
+
+```{r}
+object.size(MisDatos)
+nrow(MisDatos)
+ncol(MisDatos)
+```
+
+## e) Revisar los tipos de todas las variables del nuevo data frame
+
+```{r}
+sapply(MisDatos, class)
+```
+
+## f) Construir una tabla de frecuencias para una variable categórica y generar su correspondiente gráfico de barras, no olvides agregar títulos de ejes y título principal
+
+```{r}
+barplot(table(as.factor(MisDatos$Estatura)),
+        main = "Personas categorizadas por su estatura",
+        xlab = "Estatura",
+        ylab = "Frecuencia",
+        col = rainbow(3),
+        horiz = FALSE)
+```
+
+## g) Construir una tabla de frecuencias cruzadas entre dos variables categóricas y su correspondiente diagrama de barras
+
+```{r}
+newdata <- table(as.factor(MisDatos$Clases), as.factor(MisDatos$Estatura))
+barplot(newdata,
+        main = "Personas que prefieron clases virtuales o presenciales,\n categorizadas por estatura",
+        xlab = "Estatura",
+        ylab = "Frecuencia por Clases",
+        col = rainbow(3),
+        legend.text = rownames(newdata),
+        args.legend = list(title = "Clases", x = "topright"),
+        horiz = FALSE)
+```
+
+## h) Considerar una variable numérica (que no sea P3, ni Edad) y calcular las medidas estadísticas siguientes:
+
+```{r}
+acumulado <- MisDatos$Acumulado
+```
+
+### min(x)
+
+```{r}
+min(acumulado)
+```
+
+### max(x)
+
+```{r}
+max(acumulado)
+```
+
+### range(x)
+
+```{r}
+range(acumulado)
+```
+
+### length(x)
+
+```{r}
+length(acumulado)
+```
+
+### sum(x)
+
+```{r}
+sum(acumulado)
+```
+
+### mean(x)
+
+```{r}
+mean(acumulado)
+```
+
+### median(x)
+
+```{r}
+median(acumulado)
+```
+
+### var(x)
+
+```{r}
+var(acumulado)
+```
+
+### sqrt(var(x))
+
+```{r}
+sqrt(var(acumulado))
+```
+
+### sd(x)
+
+```{r}
+sd(acumulado)
+```
+
+### skewness(x)
+
+```{r}
+#skewness(acumulado)
+```
+
+## A partir del subconjunto genera una gráfica de barras, una de dispersión y un histograma. Deberás explicar el resultado de cada gráfica.
+
+### Gráfica de barras
+
+```{r}
+newdata <- table(as.factor(MisDatos$Colegio),as.factor(MisDatos$Financiacion))
+barplot(newdata,
+        main = "Tipo de financiación de las personas,\nde acuerdo al tipo de colegio en el que estudian",
+        xlab = "Tipo de financiación",
+        ylab = "Frecuencia por tipo de colegio",
+        col = rainbow(3),
+        legend.text = rownames(newdata),
+        args.legend = list(title = "Colegio", x = "topright"),
+        horiz = FALSE)
+```
+
+### Gráfica de dispersión
+
+```{r}
+ggplot(data = MisDatos, aes(x = Edad, y = Final)) + 
+  geom_point(alpha = 0.7, aes(color = Clases, shape = Clases))
+```

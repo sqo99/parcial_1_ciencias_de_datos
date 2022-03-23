@@ -1,0 +1,26 @@
+---
+title: "Práctica 8"
+author: "Suriel Quevedo Ortiz"
+date: '2022-03-22'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      smooth_scrool: no
+    number_sections: yes
+    theme: united
+    highlight: tango
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+# Cargar la base de datos Earquality y graficar con geom_line las temperaturas
+
+```{r}
+data(airquality)
+ggplot(data = airquality, aes(x = Temp, y = Day)) + 
+  geom_line(alpha = 0.4, color = "blue")
+```
