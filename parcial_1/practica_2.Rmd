@@ -17,14 +17,14 @@ output:
 
 ```{r}
 # Muestra la ayuda de la media aritmética
-#help (mean)
+help (mean)
 
 # Otra forma de ejecutar la ayuda de una función
-#?mean
+?mean
 
 # Se utiliza para obtener la ayuda de alguna función
 # de la cual desconocemos el nombre exacto
-#help.search("median")
+help.search("median")
 ```
 
 # Creación de variables
@@ -199,9 +199,69 @@ list2[[4]][2]
 # Ejemplos
 
 ```{r}
-peso <- c(19,14,15,17,20,23,30,19,25)
+peso <- c(19,14,15,17,20,23,30,19,25); peso
 peso < 20
 peso<20 | peso>25
 peso[peso<20]
 peso[peso<20 & peso!=15]
+trat <- c(rep("A", 3), rep("B", 3), rep("C", 3)); trat
+peso[trat == "A"]
+peso[trat == "A" | trat == "B"]
+split(peso, trat)
+split(peso, trat)$A
+x <- 1:15; length(x)
+```
+
+# Ejemplos de vectores de caracteres
+
+```{r}
+paste1 <- paste(c("I", "J", "M"), 3:5, sep = ""); paste1
+paste2 <- paste(c("I", "J", "M"), 3:5, sep = "."); paste2
+unir1 <- paste(c("el", "sol", "brilla"), collapse =" "); unir1
+unir2 <- paste(c("el", "sol", "brilla"), collapse ="-"); unir2
+unir3 <- paste(c("el", "sol", "brilla")); unir3
+letras <- LETTERS[1:9]; números <- 7:15; letras; números
+unir4 <- paste(letras, números, sep =""); unir4
+substr("abcdef", 2, 4)
+x <- paste(LETTERS[1:7], collapse = ""); x
+substr(x, 3, 7) <- c("xyz"); x
+x <- c(60, 90, 903); y <- factor(x); x ; y
+# convierte un vector factor en numérico
+as.numeric(as.character(y))
+factor1 <- factor(c("alto", "bajo", "medio")); factor1
+# Cambia el orden de las etiquetas
+factor2 <- factor(c("alto", "bajo", "medio"), levels = c("bajo", "medio", "alto")); factor2
+```
+
+# Ejemplos de arrays y matrices
+
+```{r}
+a <- 1:24; dim(a) <- c(3,4,2); a
+arr1 <- array(7, dim = c(4,5)); arr1
+mat1 <- matrix(10:29, nrow = 5); mat1
+mat2 <- matrix(10:29, nrow = 5, byrow = TRUE); mat2
+mat3 <- 10:29; dim(mat3) <- c(5, 4); mat3
+a[1,1,1]; a[1,1,2]; a[3,4,2]
+a[2, , ] # es un array de dimensión c(4,2)
+a[,3 , ] # es un array de dimensión c(3,2)
+mat3[1, ]; mat3[, 2]; mat3[c(1, 3), c(2, 4)]
+mat4 <- matrix(c(1, 3, 2, 4), nrow = 2); mat4
+mat3[mat4] # coordenadas matricialmente
+m1 <- matrix(1: 4, nr = 2, nc = 2); m1
+m2 <- matrix(6: 9, nr = 2, nc = 2); m2
+rbind(m1, m2) # rbind une matrices por filas
+cbind(m1, m2) # cbind une matrices por columnas
+diag(m1) # diagonal principal de la matriz
+```
+
+# Ejemplos de Data frames y listas
+
+```{r}
+x <- 1:4; n <- 10; M <- c(10, 35); y <- 2:5 ; x; n; M; y
+data.frame(x, n)
+data.frame(x, M)
+data.frame(x, y)
+l1 <- list(x, y); l2 <- list(A = x, B = y) ; l1; l2
+names(l1)
+names(l2)
 ```
