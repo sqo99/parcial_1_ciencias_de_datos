@@ -284,3 +284,14 @@ barplot(newdata,
 ggplot(data = MisDatos, aes(x = Edad, y = Final)) + 
   geom_point(alpha = 0.7, aes(color = Clases, shape = Clases))
 ```
+
+### Histograma
+
+```{r}
+hist(estudiantes$Gastos,
+     main = "Gastos de los alumnos",
+     xlab = "Gastos",
+     ylab = "Frecuencias",
+     col = "yellow",
+     freq = TRUE)
+```
