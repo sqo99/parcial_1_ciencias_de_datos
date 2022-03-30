@@ -75,6 +75,5 @@ mutate(airquality, Temp = (Temp * (9/5)) + 32)
 # Agrupa por días y muestra el resumen de los promedios de los atributos Wind y Temp
 
 ```{r}
-summarize(group_by(airquality, Day), promedio_wind = mean(Wind, na.rm = TRUE),
-                     promedio_temp = mean(Temp,na.rm = TRUE))
+summarize(group_by(airquality, Day), promedio_wind = mean(Wind, na.rm = TRUE), promedio_temp = mean(Temp,na.rm = TRUE))
 ```
