@@ -1,2 +1,2 @@
 # Ciencias de Datos
-# Prácticas con RStudio
+## Prácticas con RStudio
