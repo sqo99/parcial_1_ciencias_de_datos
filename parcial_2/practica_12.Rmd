@@ -1,0 +1,100 @@
+---
+title: "Práctica 12"
+author: "Suriel Quevedo Ortiz"
+date: '2022-04-04'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      smooth_scrool: no
+    number_sections: yes
+    theme: united
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+library(datos)
+library(ggplot2)
+data("ToothGrowth")
+```
+
+# Convierte la variable dose a factor
+
+```{r}
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+head(ToothGrowth)
+```
+
+# Genera un gráfico box_plot
+
+```{r}
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
+  geom_boxplot()
+p
+```
+
+# Cambia la posición de la leyenda
+
+```{r}
+p + theme(legend.position = "top")
+p + theme(legend.position = "bottom")
+p + theme(legend.position = c(0.8, 0.2))
+```
+
+# Cambiar título
+
+```{r}
+p + theme(legend.title = element_text(colour = "blue", size = 10, face = "bold"))
+```
+
+# Cambiar etiquetas
+
+```{r}
+p + theme(legend.text = element_text(colour = "blue", size = 10, face = "bold"))
+```
+
+# Cambiar color de relleno de leyenda
+
+```{r}
+p + theme(legend.background = element_rect(fill = "lightblue",
+                                           size = 0.5, linetype = "solid"))
+p + theme(legend.background = element_rect(fill = "lightblue",
+                                           size = 0.5, linetype = "solid",
+                                           colour = "darkblue"))
+```
+
+# Cambiar el orden de los elementos de leyenda
+
+```{r}
+p + scale_x_discrete(limits=c("2","0.5","1"))
+```
+
+# Eliminar la leyenda
+
+```{r}
+p + theme(legend.title = element_blank())
+p + theme(legend.position = "none")
+```
+
+# Eliminar barras en la leyenda de un gráfico
+
+## Gráfico por defecto
+
+```{r}
+ggplot(data = ToothGrowth, aes(x=dose, fill=dose)) + geom_bar()
+```
+
+## Cambiar el color del borde
+
+```{r}
+ggplot(data = ToothGrowth, aes(x=dose, fill = dose)) +
+  geom_bar(colour = "black")
+```
+
+## Agrega una leyenda en blanco
+
+```{r}
+ggplot(data = ToothGrowth, aes(x=dose, fill = dose)) +
+  geom_bar() + geom_bar(colour = "black", show_guide = FALSE)
+```
